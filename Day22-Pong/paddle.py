@@ -2,20 +2,22 @@
 from turtle import Turtle
 
 
-class Paddle:
-    def __init__(self) -> None:
-        self.width = 20
-        self.height = 100
-        self.x_pos = 350
-        self.y_pos = 0
-        self.paddle_squares = [(350, 0), (350, -20), (350, -40)]
+class Paddle(Turtle):
+    def __init__(self, x_start, y_start):
+        super().__init__()
+        self.x_start = x_start
+        self.y_start = y_start
+        self.shape('square')
+        self.color('white')
+        self.shapesize(stretch_wid=5, stretch_len=1)
+        self.penup()
+        self.goto(self.x_start, self.y_start)
+
+    def go_up(self):
+        new_y = self.ycor() + 20
+        self.goto(self.xcor(), new_y)
+
+    def go_down(self):
+        new_y = self.ycor() - 20
+        self.goto(self.xcor(), new_y)
     
-    def create_paddle(self):
-        for position in self.paddle_squares:
-            self.add_paddle_squares(position)
-    
-    def add_paddle_squares(self, position):
-        p = Turtle('square')
-        p.color('white')
-        p.penup()
-        p.goto(position)
