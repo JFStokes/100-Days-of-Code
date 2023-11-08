@@ -4,7 +4,8 @@
 from turtle import Screen, Turtle
 from ball import Ball
 from paddle import Paddle
-import time
+from text import Text
+# import time
 
 # Initializes the screen.
 screen = Screen()
@@ -17,12 +18,17 @@ screen.tracer(0)
 r_paddle = Paddle(350, 0)
 l_paddle = Paddle(-350, 0)
 b = Ball()
+r_text = Text()
+r_text.goto(200, 275)
+l_text = Text()
+l_text.goto(-200, 275)
+
 
 # Moves the ball by changing 'b.moving' to true/false.
 def start_moving_ball():
     if not b.moving:
         b.moving = True
-        print('Moving the ball #1')
+        print('Ball Served.')
     else:
         b.moving = False
 
@@ -40,7 +46,7 @@ game_is_running = True
 while game_is_running:
 
     # Used to pause between updates.
-    time.sleep(0.01)
+    # time.sleep(0.01)
 
     # Updates the screen each frame.
     screen.update()
@@ -59,6 +65,13 @@ while game_is_running:
     # Detects collision with the left paddle.
     if b.distance(l_paddle) < 50 and b.xcor() > -330:
         b.xspeed *= -1
+    
+    # Detects collision with left/right side of screen.
+    b.ball_missed(b.xcor())
+
+    # Display Scores.
+    r_text.show_score(r_paddle.points)
+    l_text.show_score(l_paddle.points)
 
 ############################## Close ################################
 screen.exitonclick()

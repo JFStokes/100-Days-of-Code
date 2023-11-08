@@ -9,8 +9,8 @@ class Ball(Turtle):
         self.penup()
         self.shapesize(stretch_len=1, stretch_wid=1)
         self.color('white')
-        self.xspeed = 2
-        self.yspeed = 2
+        self.xspeed = 5
+        self.yspeed = 5
         self.goto(0, 0)
         self.moving = False
     
@@ -26,3 +26,9 @@ class Ball(Turtle):
         
     def sim_bounce(self):
         self.xspeed = self.xspeed * -1
+    
+    def ball_missed(self, ball_location):
+        if ball_location > 400 or ball_location < -400:
+            self.moving = False
+            self.xspeed *= -1
+            self.goto((0, 0))
