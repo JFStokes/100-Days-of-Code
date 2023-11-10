@@ -1,6 +1,9 @@
 ############################ Scoreboard #############################
+import os
 from turtle import Turtle
 
+current_dir = os.getcwd()
+print(f'CWD is {current_dir}.')
 
 # Class for ScoreBoard object (inhereted from Turtle object).
 class ScoreBoard(Turtle):
@@ -9,7 +12,8 @@ class ScoreBoard(Turtle):
         super().__init__()  # Initialize Turtle inside ScoreBoard.
         self.color('white')
         self.score = 0
-        self.high_score = 0
+        with open(f'{current_dir}\\Day20-21-Snake\\data.txt') as data:
+            self.high_score = int(data.read())
         self.penup()
         self.hideturtle()
         self.goto(0, 280)
@@ -25,6 +29,8 @@ class ScoreBoard(Turtle):
     def reset(self):
         if self.score > self.high_score:
             self.high_score = self.score
+            with open(f'{current_dir}\\Day20-21-Snake\\data.txt', mode='w') as data:
+                data.write(f'{self.high_score}')
         self.score = 0
 
 
