@@ -1,4 +1,6 @@
+# Object used to create each state's label.
 from turtle import Turtle
+
 
 class Text(Turtle):
     def __init__(self, name, x_coor, y_coor):
