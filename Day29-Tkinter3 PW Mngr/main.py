@@ -1,3 +1,4 @@
+import json
 import random
 import os
 import pyperclip
@@ -90,17 +91,30 @@ def save_to_txt():
     \nPassword: {password_txt}\
     \nIs this OK?')
 
+    new_data = {
+        website_txt: {
+            "email": email_username_txt,
+            "password": password_txt
+        }
+    }
+
     # If user clicks OK, save data and clear fields.
     if is_ok:
-        # Save variable values to file.
-        with open('data.txt', 'a') as file:
-            file.write(website_txt + ' | ')
-            file.write(email_username_txt + ' | ')
-            file.write(password_txt + '\n')
+
+        # Save variable values to json file.
+        try:
+            with open("data.json", "r") as data_file:
+                data = json.load(data_file)
+                data.update(new_data)
+            with open('data.json', 'w') as data_file:
+                json.dump(data, data_file, indent=4, separators=(",", ": "))
+        except FileNotFoundError:
+            with open('data.json', 'w') as data_file:
+                json.dump(new_data, data_file, indent=4, separators=(",", ": "))
+
         
         # Erase entry fields after saving.
         website_entry.delete(0, tkinter.END)
-        email_username_entry.delete(0, tkinter.END)
         password_entry.delete(0, tkinter.END)
 
         # Set focus to the website entry.
