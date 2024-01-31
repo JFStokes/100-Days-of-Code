@@ -11,7 +11,7 @@ import pandas
 from text import Text
 from scoreboard import ScoreBoard
 
-CWD = os.getcwd()
+CWD = os.path.dirname(__file__)
 
 # Variable for the image of the US map.
 map_image = CWD + '\\blank_states_img.gif'
@@ -24,7 +24,7 @@ screen.tracer(0)
 turtle.shape(map_image) # Gives screen turtle the map image.
 
 # Import data from csv and put States in a list.
-data = pandas.read_csv('50_states.csv')
+data = pandas.read_csv(CWD + '/50_states.csv')
 state_list = data['state'].to_list()
 
 # Create a list to store used player answers.

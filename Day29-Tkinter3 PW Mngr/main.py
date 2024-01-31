@@ -1,7 +1,6 @@
 import json
 import random
 import os
-import pyperclip
 import tkinter
 from tkinter import messagebox
 
@@ -55,7 +54,6 @@ def generate_password():
 
     # Inserts password to entry and saves to clipboard.
     password_entry.insert(0, password)
-    pyperclip.copy(password)
     print(f"Your password is: {password}")
 
 # ----------------------- SAVE PASSWORD --------------------------- #

@@ -1,7 +1,11 @@
 # Object used to display current scores and high scores.
 
 import json
+import os
 from turtle import Turtle
+
+# Get file path.
+DIR_PATH = os.path.dirname(__file__)
 
 
 class ScoreBoard(Turtle):
@@ -31,7 +35,7 @@ class ScoreBoard(Turtle):
         # Y pos of each record.
         starting_y = self.y
 
-        with open('scores.json', 'r') as scores_file:
+        with open(DIR_PATH + '/scores.json', 'r') as scores_file:
             data = json.load(scores_file)
 
             # Display data for each record.

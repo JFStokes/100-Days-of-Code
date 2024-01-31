@@ -2,8 +2,12 @@
 # A GUI app to convert miles to kilometers.
 import datetime
 # import logging
+import os
 import pygame
 from tkinter import *
+
+# Get file path.
+DIR_PATH = os.path.dirname(__file__)
 
 # Setup logging.
 # sys.stdout = open('output.log', 'a')
@@ -18,9 +22,9 @@ log('initiated 4.')
 
 # Load image, icon, and ping sound.
 pygame.mixer.init()
-pygame.mixer.music.load("C:\\Users\\User\\Desktop\\Dev\\100 Days of Code\\Day27-Tkinter\\Miles to Km\\ping.mp3")
-image_path = "C:\\Users\\User\\Desktop\\Dev\\100 Days of Code\\Day27-Tkinter\\Miles to Km\\miles_to_km.png"
-icon_path = "C:\\Users\\User\\Desktop\\Dev\\100 Days of Code\\Day27-Tkinter\\Miles to Km\\miles_to_km.ico"
+pygame.mixer.music.load(DIR_PATH + '/ping.mp3')
+image_path = DIR_PATH + "/miles_to_km.png"
+icon_path = DIR_PATH + "/miles_to_km.ico"
 
 # Create the Window object.
 window = Tk()

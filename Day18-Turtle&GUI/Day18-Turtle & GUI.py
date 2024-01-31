@@ -4,10 +4,14 @@
 #                           TURTLE & GUI                            #
 #####################################################################
 from turtle import Turtle, Screen
+import os
 import time
 import random
 import colorgram
 
+# Get file path.
+DIR_PATH = os.path.dirname(__file__)
+print(f'Path is {DIR_PATH}')
 
 # The turtle object.
 timmy = Turtle()
@@ -108,11 +112,11 @@ time.sleep(5)
 ##################### Hirst Painting Project ########################
 # Preview Hirst Painting.
 screen.clearscreen()
-screen.bgpic('Day18 Hirst Painting.png')
+screen.bgpic(DIR_PATH + '/Day18 Hirst Painting.png')
 screen.update()
 
 # Extract 10 colors from an image.
-colors = colorgram.extract('Day18 Hirst Painting.jpg', 18)
+colors = colorgram.extract(DIR_PATH + '/Day18 Hirst Painting.jpg', 18)
 rgb_colors = []
 for c in colors:
     r = c.rgb.r
