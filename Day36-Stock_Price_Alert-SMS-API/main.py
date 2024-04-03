@@ -44,8 +44,14 @@ close_dif = abs(float(yesterday_closing) - float(previous_close)) # Gets absolut
 print(f"--> Close Difference: ${close_dif}")
 
 #TODO 4. - Work out the percentage difference in price between closing price yesterday and closing price the day before yesterday.
+percent_change = close_dif / float(previous_close) * 100
+print(f"--> Percent Change: {percent_change}")
 
 #TODO 5. - If TODO4 percentage is greater than 5 then print("Get News").
+if percent_change > 5:
+    print("Get news!")
+else:
+    print("All is normal...")
 
     ## STEP 2: https://newsapi.org/ 
     # Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
