@@ -1,11 +1,14 @@
+import json
 import requests
+import smtplib
 
 # Set Constants. 
-STOCK_NAME = "TSLA"
-COMPANY_NAME = "Tesla Inc"
+STOCK_NAME = "MSFT"
+COMPANY_NAME = "Microsoft Corp"
 STOCK_ENDPOINT = "https://www.alphavantage.co/query"
 NEWS_ENDPOINT = "https://newsapi.org/v2/everything"
 STOCK_API_KEY = "DD0GRN80G5LP5L6W"
+NEWS_API_KEY = "3ef7fe62559a4eecae2798f2dfd7d24a"
 
 # Set Stock params.
 stock_params = {
@@ -48,7 +51,7 @@ percent_change = close_dif / float(previous_close) * 100
 print(f"--> Percent Change: {percent_change}")
 
 #TODO 5. - If TODO4 percentage is greater than 5 then print("Get News").
-if percent_change > 5:
+if percent_change > 0.1:
     print("Get news!")
 else:
     print("All is normal...")
@@ -57,6 +60,32 @@ else:
     # Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
 
 #TODO 6. - Instead of printing ("Get News"), use the News API to get articles related to the COMPANY_NAME.
+news_params = {
+    "apiKey": NEWS_API_KEY,
+    "q": "microsoft"
+}
+
+news_response = requests.get(NEWS_ENDPOINT, params=news_params)
+news_response.raise_for_status()
+news_data = news_response.json()
+
+with open("news.json", mode="a") as file:
+    json.dump(news_data, file, indent=4)
+
+# Email data to myself.
+my_email = 'joshua.f.stokes.mil@gmail.com'
+password = 'cgfhzcjcgcazjvoo'
+to_email = 'joshua.stokes1617@yahoo.com'
+email_body = json.dumps(news_data, indent=4)
+
+with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
+    connection.starttls()
+    connection.login(user=my_email, password=password)
+    connection.sendmail(
+        from_addr=my_email,
+        to_addrs=to_email,
+        msg=f'Subject:Microsoft News\n\n{email_body}.'
+    )
 
 #TODO 7. - Use Python slice operator to create a list that contains the first 3 articles. Hint: https://stackoverflow.com/questions/509211/understanding-slice-notation
 
