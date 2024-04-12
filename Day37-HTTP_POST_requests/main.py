@@ -8,6 +8,7 @@ GRAPH_ID = "graph1"
 PIXELA_ENDPOINT = "https://pixe.la/v1/users"
 GRAPH_ENDPOINT = f"{PIXELA_ENDPOINT}/{USERNAME}/graphs"
 GRAPH_ENDPOINT2 = f"{PIXELA_ENDPOINT}/{USERNAME}/graphs/{GRAPH_ID}"
+GRAPH_UPDATE_ENDPOINT = f"{PIXELA_ENDPOINT}/{USERNAME}/graphs/{GRAPH_ID}/"
 
 # Required params for POST request to pixe.la. 
 user_params = {
@@ -40,11 +41,23 @@ headers = {
 # Gets today's datetime.
 today = datetime.now()
 
-graph_data = {
-    "date": today.strftime("%Y%m%d"),
-    "quantity": "3.0"
-}
+# graph_data = {
+#     "date": today.strftime("%Y%m%d"),
+#     "quantity": "3.0"
+# }
 
 # Send POST request to send data to the graph.
-response = requests.post(url=GRAPH_ENDPOINT2, json= graph_data, headers=headers)
+# response = requests.post(url=GRAPH_ENDPOINT2, json= graph_data, headers=headers)
+# print(response.text)
+
+# Send UPDATE request to change previous data
+date = input("--> Date(yyyymmdd): ")
+amount = input("--> Amount: ")
+
+graph_data = {
+    "quantity": amount
+}
+
+# https://pixe.la/v1/users/jfstokes/graphs/graph1.html
+response = requests.put(url=GRAPH_UPDATE_ENDPOINT + date, json=graph_data, headers=headers)
 print(response.text)

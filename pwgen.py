@@ -29,13 +29,6 @@ int_list = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 spc_list = ['!', '@', '#', '$']
 #-------------------------------------------------------------------#
 
-# Function to check input for int less than 21.
-# def check_input(user_input):
-#     if user_input < 21:
-#         print("--> Valid input.")
-#     else:
-#         print("--> Input value must be an integer of 20 or less.")
-
 # Display intro messages.
 print("\n--> Welcome to Josh's Random Password Generator.")
 site = input("--> Site/Service: ")
